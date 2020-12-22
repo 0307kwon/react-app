@@ -30,11 +30,10 @@ class Subject extends Component {
   render() {
     return (
       <header>
-        <h1>WEB</h1>
-        world wide web~!
+        <h1>{this.props.title}</h1>
+        {this.props.subTitle}
       </header>
     );
-
   }
 }
 
@@ -42,7 +41,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Subject></Subject>
+        <Subject title="안녕하세요" subTitle="하이"></Subject>
         <Navigation></Navigation>
         <Article></Article>
       </div>
