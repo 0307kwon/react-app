@@ -1,27 +1,21 @@
 import './App.css';
 import { Component } from 'react';
 
-class Article extends Component {
+class Content extends Component {
   render() {
     return (
       <article>
-        <h2>HTML</h2>
-        HTML is HyperText Markup Language.
+        <h2>{this.props.title}</h2>
+        {this.props.content}
       </article>
     );
   }
 }
 
-class Navigation extends Component {
+class NavigationLink extends Component {
   render() {
     return (
-      <nav>
-        <ul>
-            <li><a href="1.html">HTML</a></li>
-            <li><a href="2.html">HTML</a></li>
-            <li><a href="3.html">HTML</a></li>
-        </ul>
-      </nav>    
+      <li><a href={this.props.link}>{this.props.text}</a></li>    
     );
   }
 }
@@ -42,8 +36,14 @@ class App extends Component {
     return (
       <div className="App">
         <Subject title="안녕하세요" subTitle="하이"></Subject>
-        <Navigation></Navigation>
-        <Article></Article>
+        <nav>
+          <ul>
+            <NavigationLink link="1.html" text="HTML1"></NavigationLink>
+            <NavigationLink link="2.html" text="HTML2"></NavigationLink>
+            <NavigationLink link="3.html" text="HTML3"></NavigationLink>
+          </ul>
+        </nav>
+        <Content title="HTML" content="HTML is HyperText Markup Language."></Content>
       </div>
     );
   }
