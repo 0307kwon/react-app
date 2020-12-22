@@ -1,35 +1,9 @@
 import './App.css';
 import { Component } from 'react';
+import Content from "./component/content.js";
+import NavigationLink from "./component/navigation-link.js";
+import Subject from "./component/subject.js";
 
-class Content extends Component {
-  render() {
-    return (
-      <article>
-        <h2>{this.props.title}</h2>
-        {this.props.content}
-      </article>
-    );
-  }
-}
-
-class NavigationLink extends Component {
-  render() {
-    return (
-      <li><a href={this.props.link}>{this.props.text}</a></li>    
-    );
-  }
-}
-
-class Subject extends Component {
-  render() {
-    return (
-      <header>
-        <h1>{this.props.title}</h1>
-        {this.props.subTitle}
-      </header>
-    );
-  }
-}
 
 class App extends Component {
   render() {
