@@ -12,7 +12,12 @@ class App extends Component {
       subject: {
         title: "안녕하세요",
         sub: "하이",
-      }
+      },
+      navigations: [
+        {id: 0, title: "HTML1"},
+        {id: 1, title: "HTML2"},
+        {id: 2, title: "HTML3"}
+      ]
     }
   }
   render() {
@@ -22,13 +27,8 @@ class App extends Component {
         title={this.state.subject.title} 
         subTitle={this.state.subject.sub}
         ></Subject>
-        <nav>
-          <ul>
-            <NavigationLink link="1.html" text="HTML1"></NavigationLink>
-            <NavigationLink link="2.html" text="HTML2"></NavigationLink>
-            <NavigationLink link="3.html" text="HTML3"></NavigationLink>
-          </ul>
-        </nav>
+        <NavigationLink list={this.state.navigations}></NavigationLink>
+        
         <Content title="HTML" content="HTML is HyperText Markup Language."></Content>
       </div>
     );
