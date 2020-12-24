@@ -6,10 +6,22 @@ import Subject from "./component/subject.js";
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      subject: {
+        title: "안녕하세요",
+        sub: "하이",
+      }
+    }
+  }
   render() {
     return (
       <div className="App">
-        <Subject title="안녕하세요" subTitle="하이"></Subject>
+        <Subject 
+        title={this.state.subject.title} 
+        subTitle={this.state.subject.sub}
+        ></Subject>
         <nav>
           <ul>
             <NavigationLink link="1.html" text="HTML1"></NavigationLink>
