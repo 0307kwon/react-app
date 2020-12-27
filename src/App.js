@@ -11,8 +11,12 @@ class App extends Component {
     this.state = {
       mode: "welcome",
       subject: {
-        title: "안녕하세요",
-        sub: "하이",
+        title: "WEB",
+        sub: "World Wide Web!",
+      },
+      welcome: {
+        title: "welcome",
+        sub: "hi",
       },
       navigations: [
         {id: 0, title: "HTML1", docs:"html1 입니다"},
@@ -22,15 +26,31 @@ class App extends Component {
     }
   }
   render() {
+    let _title;
+    let _sub;
+    if(this.state.mode === "welcome") {
+      _title = this.state.welcome.title;
+      _sub = this.state.welcome.sub;
+    }
+    if(this.state.mode === "read") {
+      _title = this.state.navigations[0].title;
+      _sub = this.state.navigations[0].docs;
+    }
     return (
       <div className="App">
         <Subject 
         title={this.state.subject.title} 
         subTitle={this.state.subject.sub}
+        onClick={(event) => {
+          event.preventDefault();
+          this.setState({
+            mode: "read",
+          })
+        }}
         ></Subject>
         <NavigationLink list={this.state.navigations}></NavigationLink>
         
-        <Content title="HTML" content="HTML is HyperText Markup Language."></Content>
+        <Content title={_title} content={_sub}></Content>
       </div>
     );
   }
