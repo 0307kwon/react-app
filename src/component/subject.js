@@ -6,7 +6,10 @@ export default class Subject extends Component {
       <header>
         <h1>
           <a href="/" 
-          onClick={this.props.onClick}>
+          onClick={(event) => {
+            event.preventDefault();
+            this.props.onClick();
+          }}>
             {this.props.title}
           </a>
         </h1>

@@ -6,8 +6,19 @@ export default class NavigationLink extends Component {
     const list = [];
     navigations.forEach((navigation) => {
       list.push(
-        <li key={navigation.id}>
-          <a href={`/contents/${navigation.title}`}>{navigation.title}</a>
+        <li 
+        key={navigation.id} 
+        >
+          <a 
+          href={"/"}
+          data-id={navigation.id}
+          onClick={(event) => {
+            event.preventDefault();
+            this.props.onClick(event.target.dataset.id);
+          }}
+          >
+            {navigation.title}
+          </a>
         </li>
       );
     });

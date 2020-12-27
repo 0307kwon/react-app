@@ -10,6 +10,7 @@ class App extends Component {
     super(props);
     this.state = {
       mode: "welcome",
+      selectedPostID: 0,
       subject: {
         title: "WEB",
         sub: "World Wide Web!",
@@ -33,22 +34,29 @@ class App extends Component {
       _sub = this.state.welcome.sub;
     }
     if(this.state.mode === "read") {
-      _title = this.state.navigations[0].title;
-      _sub = this.state.navigations[0].docs;
+      const content = this.state.navigations.find((navigation) => {
+        return navigation.id === this.state.selectedPostID;
+      });
+      _title = content.title;
+      _sub = content.docs;
     }
     return (
       <div className="App">
         <Subject 
         title={this.state.subject.title} 
         subTitle={this.state.subject.sub}
-        onClick={(event) => {
-          event.preventDefault();
+        onClick={() => {
           this.setState({
-            mode: "read",
+            mode: "welcome",
           })
         }}
         ></Subject>
-        <NavigationLink list={this.state.navigations}></NavigationLink>
+        <NavigationLink list={this.state.navigations} onClick={(id) => {
+          this.setState({
+            mode: "read",
+            selectedPostID: Number(id),
+          })
+        }}></NavigationLink>
         
         <Content title={_title} content={_sub}></Content>
       </div>
