@@ -9,14 +9,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      mode: "welcome",
       subject: {
         title: "안녕하세요",
         sub: "하이",
       },
       navigations: [
-        {id: 0, title: "HTML1"},
-        {id: 1, title: "HTML2"},
-        {id: 2, title: "HTML3"}
+        {id: 0, title: "HTML1", docs:"html1 입니다"},
+        {id: 1, title: "HTML2", docs:"html2 입니다"},
+        {id: 2, title: "HTML3", docs:"html3 입니다"}
       ]
     }
   }
