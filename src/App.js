@@ -51,13 +51,25 @@ class App extends Component {
           })
         }}
         ></Subject>
-        <NavigationLink list={this.state.navigations} onClick={(id) => {
+        <NavigationLink 
+        list={this.state.navigations} 
+        onClick={(id) => {
           this.setState({
             mode: "read",
             selectedPostID: Number(id),
           })
         }}></NavigationLink>
-        
+        <ul>
+          <li>
+            <a href="/create">create</a>
+          </li>
+          <li>
+            <a href="/update">update</a>
+          </li>
+          <li>
+            <input type="button" value="delete"/>
+          </li>
+        </ul>
         <Content title={_title} content={_sub}></Content>
       </div>
     );
