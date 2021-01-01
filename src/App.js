@@ -1,9 +1,10 @@
 import './App.css';
 import { Component } from 'react';
-import Content from "./component/content.js";
+import ReadContent from "./component/read-content.js";
 import NavigationLink from "./component/navigation-link.js";
 import Subject from "./component/subject.js";
-
+import Control from "./component/control.js";
+import CreateContent from './component/create-contents';
 
 class App extends Component {
   constructor(props) {
@@ -26,19 +27,31 @@ class App extends Component {
       ]
     }
   }
+  getReadContent(title, sub) {
+    return <ReadContent title={title} content={sub}></ReadContent>;
+  }
+  getCreateContent() {
+    return <CreateContent></CreateContent>
+  }
   render() {
-    let _title;
-    let _sub;
+    let _article;
     if(this.state.mode === "welcome") {
-      _title = this.state.welcome.title;
-      _sub = this.state.welcome.sub;
+      _article = this.getReadContent(
+        this.state.welcome.title, 
+        this.state.welcome.sub
+        );
     }
     if(this.state.mode === "read") {
       const content = this.state.navigations.find((navigation) => {
         return navigation.id === this.state.selectedPostID;
       });
-      _title = content.title;
-      _sub = content.docs;
+      _article =  this.getReadContent(
+        content.title, 
+        content.docs
+        );      
+    }
+    if(this.state.mode === "create") {
+      _article = this.getCreateContent();
     }
     return (
       <div className="App">
@@ -57,20 +70,14 @@ class App extends Component {
           this.setState({
             mode: "read",
             selectedPostID: Number(id),
-          })
+          });
         }}></NavigationLink>
-        <ul>
-          <li>
-            <a href="/create">create</a>
-          </li>
-          <li>
-            <a href="/update">update</a>
-          </li>
-          <li>
-            <input type="button" value="delete"/>
-          </li>
-        </ul>
-        <Content title={_title} content={_sub}></Content>
+        <Control onClick={(_mode) => {
+          this.setState({
+            mode: _mode,
+          });
+        }}></Control>
+        {_article}
       </div>
     );
   }
