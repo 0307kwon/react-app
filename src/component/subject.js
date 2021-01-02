@@ -13,7 +13,7 @@ export default class Subject extends Component {
             {this.props.title}
           </a>
         </h1>
-        {this.props.subTitle}
+        {this.props.innerContents}
       </header>
     );
   }

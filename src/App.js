@@ -14,31 +14,43 @@ class App extends Component {
       selectedPostID: 0,
       subject: {
         title: "WEB",
-        sub: "World Wide Web!",
+        innerContents: "World Wide Web!",
       },
       welcome: {
         title: "welcome",
-        sub: "hi",
+        innerContents: "hi",
       },
       navigations: [
-        {id: 0, title: "HTML1", docs:"html1 입니다"},
-        {id: 1, title: "HTML2", docs:"html2 입니다"},
-        {id: 2, title: "HTML3", docs:"html3 입니다"}
+        {id: 0, title: "HTML1", innerContents:"html1 입니다"},
+        {id: 1, title: "HTML2", innerContents:"html2 입니다"},
+        {id: 2, title: "HTML3", innerContents:"html3 입니다"}
       ]
     }
+    this.maxContentsID = this.state.navigations.length - 1;
   }
-  getReadContent(title, sub) {
-    return <ReadContent title={title} content={sub}></ReadContent>;
+  getReadContent(title, innerContents) {
+    return <ReadContent title={title} content={innerContents}></ReadContent>;
   }
   getCreateContent() {
-    return <CreateContent></CreateContent>
+    return <CreateContent onSubmit={(_title, _innerContents) => {
+      this.maxContentsID += 1;
+      console.log(this.maxContentsID, _title, _innerContents);
+      this.state.navigations.push({
+        id: this.maxContentsID,
+        title: _title,
+        innerContents: _innerContents,
+      });
+      this.setState({
+        navigations: this.state.navigations,
+      })
+    }}></CreateContent>
   }
   render() {
     let _article;
     if(this.state.mode === "welcome") {
       _article = this.getReadContent(
         this.state.welcome.title, 
-        this.state.welcome.sub
+        this.state.welcome.innerContents
         );
     }
     if(this.state.mode === "read") {
@@ -47,7 +59,7 @@ class App extends Component {
       });
       _article =  this.getReadContent(
         content.title, 
-        content.docs
+        content.innerContents
         );      
     }
     if(this.state.mode === "create") {
@@ -57,7 +69,7 @@ class App extends Component {
       <div className="App">
         <Subject 
         title={this.state.subject.title} 
-        subTitle={this.state.subject.sub}
+        innerContents={this.state.subject.innerContents}
         onClick={() => {
           this.setState({
             mode: "welcome",
